@@ -1,0 +1,31 @@
+---
+# tasks file for user
+
+# Add the user
+- name: User, shell and secondary groups setup
+  user:
+    name: "{{ item.name }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    comment: "{{ item.comment }}"
+    groups: "{{ item.groups | default(omit) }}"
+    append: true
+  become: true
+
+# Setup ssh keys
+- name: Set authorized key taken from file
+  authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ item.ssh_key }}"
+    state: present
+  when: item.ssh_key is defined
+  become: true
+
+# Setup sudo and validate the sudoers file
+- name: add defined groups to sudoers
+  template:
+    src: sudoers.j2
+    dest: "/etc/sudoers.d/{{ item.name }}"
+    validate: 'visudo -cf %s'
+    mode: "0440"
+  when: item.sudo
+  become: true
