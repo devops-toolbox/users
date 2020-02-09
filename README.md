@@ -8,10 +8,10 @@ users
 Ansible galaxy:
 ---------------
 
-[https://galaxy.ansible.com/devops-toolbox.users](https://galaxy.ansible.com/devops-toolbox.users)
+[https://galaxy.ansible.com/devopstoolbox.users](https://galaxy.ansible.com/devopstoolbox.users)
 
 ```bash
-ansible-galaxy install devops-toolbox.users
+ansible-galaxy install devopstoolbox.users
 ```
 
 Requirements
@@ -53,7 +53,7 @@ Example Playbook
   tasks:
     - name: users is configured
       import_role:
-        name: devops-toolbox.users
+        name: devopstoolbox.users
       vars:
         users_groups:
           - wheel
@@ -76,4 +76,4 @@ MIT
 Author Information
 ------------------
 
-- [Mihai Criveti](https://www.linkedin.com/in/devops-toolbox.)
+- [Mihai Criveti](https://www.linkedin.com/in/devopstoolbox.)
